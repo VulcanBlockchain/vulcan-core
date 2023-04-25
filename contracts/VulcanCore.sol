@@ -23,7 +23,7 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 
 contract VulcanCore {
-    uint8   public constant BLOCKS_PER_EPOCH = 2;//180;
+    uint8   public constant BLOCKS_PER_EPOCH = 180;
     uint32  public constant MAX_EPOCH = 735840;
     uint32  public constant REBASE_DIVISOR = 10 ** 8;
     uint64  public constant REBASE_VALUE = 100001256;
