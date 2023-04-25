@@ -8,8 +8,16 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
+  // We get the contract to deploy
+  const VulcanCore = await hre.ethers.getContractFactory('VulcanCore');
+  const vulcanCore = await VulcanCore.deploy(0);
+  await vulcanCore.deployed();
+  await vulcanCore.populateRebaseTable();
+  console.log(await vulcanCore.rebaseInfo.call());
+  console.log('VulcanCore deployed to:', vulcanCore.address);
+
   const VULToken = await hre.ethers.getContractFactory("xVUL");
-  const vulToken = await VULToken.deploy();
+  const vulToken = await VULToken.deploy(vulcanCore.address);
   await vulToken.deployed();
   console.log("xVUL Token deployed to:", vulToken.address);
 }
