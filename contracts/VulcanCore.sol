@@ -22,8 +22,9 @@ pragma solidity >=0.8.2 <0.9.0;
  *          amount will be by using any of the helper functions in this contract.
  */
 
-contract VulcanCorePreview {
-    uint8   public constant BLOCKS_PER_EPOCH = 36; // Set to approximately 3 mins per epoch instead of 180;
+contract VulcanCore {
+    // MainNet = 180 (epoch every 15 mins); TestNet = 24 (epoch every 2 mins)
+    uint8   public constant BLOCKS_PER_EPOCH = 24;
     uint32  public constant MAX_EPOCH = 735840;
     uint32  public constant REBASE_DIVISOR = 10 ** 8;
     uint64  public constant REBASE_VALUE = 100001256;
@@ -66,11 +67,12 @@ contract VulcanCorePreview {
     /**
      * @dev     Returns the current block number, epoch number and rebase value
      * @return  uint256  Current block number
+     * @return  uint8    Number of blocks per epoch
      * @return  uint32  Current epoch number
      * @return  uint64  Current rebase value
      */
-    function rebaseInfo() public view returns (uint256, uint32, uint64) {
-        return (block.number, epoch(block.number), rebaseLookup(block.number));
+    function rebaseInfo() public view returns (uint256, uint8, uint32, uint64) {
+        return (block.number, BLOCKS_PER_EPOCH, epoch(block.number), rebaseLookup(block.number));
     }
 
     /**
@@ -167,6 +169,27 @@ contract VulcanCorePreview {
         return (amount * 2) - rebaseAt(amount, blockNumber);
     }
 
+    function totalSupply(
+    ) public view returns (uint256) {
+        return totalSupplyAt(block.number);
+    }
+
+    function totalSupplyAt(
+        uint256 blockNumber
+    ) public view returns (uint256) {
+        
+        uint32 epochNumber = epoch(blockNumber);
+        
+        if (epochNumber <= 8760) { // initial
+            return 330000000 * 10**18;
+        } else if (epochNumber <= 17520) { // post Firestorm 1
+            return 161700000 * 10**18;
+        } else if (epochNumber <= 26280) { // post Firestorm 2
+            return 79233000 * 10**18;
+        } else {                           // post Firestorm 3
+            return 50000000 * 10**18;      // TODO: Calculate based on balance of FirePit account
+        }
+    }
 
     uint32 lastEpoch = 0;   // Track which epoch was last processed
     /**

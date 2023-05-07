@@ -17,6 +17,15 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  
  module.exports = {
    solidity: "0.8.10",
+   defaultNetwork: "vulcan",
+   networks: {
+    hardhat: {
+    },
+    vulcan: {
+      url: "https://test-rpc.vulcanblockchain.com/",
+      accounts: ["6a8a66f2a7a76a55b042060740d4777383b4fb3ac4a51370358cf85d6e1ed79f"]
+    }  
+   }
    //networks:{
    //  rinkeby:{
    //    url: INFURA_URL,
