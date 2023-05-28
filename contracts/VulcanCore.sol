@@ -14,7 +14,7 @@ pragma solidity >=0.8.2 <0.9.0;
 
 /**
  * @author  Nik Kalyani @techbubble
- * @title   Vulcan Core Preview v0.5
+ * @title   Vulcan Core Gamma v0.6
  * @dev     This is the Vulcan Core contract. Its purpose is to give developers an easy, on-chain method
  *          to obtain protocol rebasing information. The contract has a lookup table "rebaseTable" that
  *          is a mapping of epoch numbers to the rebasing multiplier value for that epoch. Using this table
@@ -23,8 +23,8 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 
 contract VulcanCore {
-    // MainNet = 180 (epoch every 15 mins); TestNet = 24 (epoch every 2 mins)
-    uint8   public constant BLOCKS_PER_EPOCH = 24;
+    // MainNet = 180 (epoch every 900 seconds); TestNet = 18 (epoch every 90 seconds)
+    uint8   public constant BLOCKS_PER_EPOCH = 18;
     uint32  public constant MAX_EPOCH = 735840;
     uint32  public constant REBASE_DIVISOR = 10 ** 8;
     uint64  public constant REBASE_VALUE = 100001256;
@@ -36,9 +36,8 @@ contract VulcanCore {
 
     mapping(uint32 => uint64) public rebaseTable;
 
-    constructor(uint256 startBlock) {
+    constructor() {
         rebaseTable[0] = 100000000;
-        startRebasingBlock = startBlock == 0 ? block.number : startBlock;
         populateRebaseTable();
     }
 

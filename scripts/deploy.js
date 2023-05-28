@@ -15,11 +15,6 @@ async function main() {
   await vulcanCore.populateRebaseTable();
   console.log(await vulcanCore.rebaseInfo.call());
   console.log('VulcanCore deployed to:', vulcanCore.address);
-
-  const VULToken = await hre.ethers.getContractFactory("xVUL");
-  const vulToken = await VULToken.deploy(vulcanCore.address);
-  await vulToken.deployed();
-  console.log("xVUL Token deployed to:", vulToken.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -1,17 +1,15 @@
 # Vulcan Core
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project contains the contract code and related scripts for the VulcanCore contract which helps developers write rebasing dapps for Vulcan Protocol.
 
-Try running some of the following tasks:
+Current TestNet Gamma VulcanCore contract:
 
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+0x176a6DD29329Af5AC82B8cc9CC4086e9f096A42d
 
-Current testnet Core contract:
+`npm install` to install dependencies
 
-0x6Aafd19f76eAeE591e5E0d47CA0D704EFdBe9fF2
+`node scripts/queryTable` to query the contract and display the rebasing table
+
+More docs and dev support are available via @Decentology https://dappstarter.dev
+
+

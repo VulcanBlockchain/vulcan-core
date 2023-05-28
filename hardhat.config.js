@@ -1,10 +1,12 @@
 require("@nomiclabs/hardhat-waffle");
+const helpers = require("@nomicfoundation/hardhat-network-helpers");
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
     console.log(account.address);
+    helpers.setNonce(account.address, 0)
   }
 });
 
@@ -23,7 +25,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     },
     vulcan: {
       url: "https://test-rpc.vulcanblockchain.com/",
-      accounts: ["6a8a66f2a7a76a55b042060740d4777383b4fb3ac4a51370358cf85d6e1ed79f"]
+      accounts: ["beefd053a48136935a2625eb4cc9a5ed2e5316b6f0d3f6feb8597356fbb8d604"]
     }  
    }
    //networks:{
