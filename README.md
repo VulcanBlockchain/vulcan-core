@@ -4,7 +4,7 @@ This project contains the contract code and related scripts for the VulcanCore c
 
 Current TestNet Gamma VulcanCore contract:
 
-0x176a6DD29329Af5AC82B8cc9CC4086e9f096A42d
+0x14aaB8ad0fa274854008Ad967960a0BC7eE65227
 
 `npm install` to install dependencies
 
